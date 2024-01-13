@@ -1,16 +1,21 @@
-$MYSQL_PATH = "C:\wamp64\bin\mariadb\mariadb11.2.2\bin\mysql.exe"
-$DB_USER = ""
-$DB_PASSWORD = ""
-$DB_NAME = ""
-$SQL_PATH = "C:\wamp64\www\site\database\XXXX.sql"
+$MYSQL_PATH = "C:\wamp64\bin\mariadb\mariadb10.10.2\bin\mysql.exe"
+$DB_USER = "root"
+$DB_PASSWORD = "root66"
+$DB_NAME = "site"
+$SQL_PATH = "C:\wamp64\www\site\mwp_db\site.sql"
 $ERROR_LOG = "$env:USERPROFILE\Desktop\error.log"
 
-$SEARCH_TARGET = 'https://site.fi'
-$REPLACE_TARGET = 'http://localhost/site'
-$SKIP_COLUMNS = '--skip-columns=guid'
+$SEARCH_TARGET = '"https://site.fi"'
+$REPLACE_TARGET = '"http://localhost/site"'
 $TABLES_PREFIX = '--all-tables-with-prefix'
 
-$WP_CLI_COMMAND = "wp search-replace '$SEARCH_TARGET' '$REPLACE_TARGET' $SKIP_COLUMNS $TABLES_PREFIX"
+$WP_CLI_COMMAND = "wp search-replace '$SEARCH_TARGET' '$REPLACE_TARGET' $TABLES_PREFIX"
+Remove-Item -Path ".\.htaccess" -Force
+
+$URL = "https://gist.githubusercontent.com/BFTrick/3706672/raw/be744502cf3921f761cbef11878af6f4a2024c3d/.htaccess"
+$OUTPUT_URL = Join-Path -Path $PSScriptRoot -ChildPath ".htaccess"
+
+Invoke-WebRequest -Uri $URL -OutFile $OUTPUT_URL
 
 function Write-Host-Color {
     param(
@@ -50,7 +55,7 @@ if (Test-Path $FILE_PATH -PathType Leaf) {
     try {
         # Attempt to read the content of the file
         $CONTENT = Get-Content $FILE_PATH -Raw
-        Write-Host-Color "File is accessible. Content: $($CONTENT)"
+        Write-Host-Color "File is accessible."
 
         # Perform search and replace
         $NEW_CONTENT = $CONTENT -replace $SEARCH_STRING, $REPLACE_STRING
@@ -121,8 +126,6 @@ if ($PROCESS.ExitCode -eq 0) {
         # Directory does not contain WordPress installation
         Write-Host-Color "Current directory is not a WordPress installation."
     }
-
-    Invoke-Expression $WP_CLI_COMMAND
 
 } else {
     Write-Host-Color "Process failed with exit code $($PROCESS.ExitCode)."
