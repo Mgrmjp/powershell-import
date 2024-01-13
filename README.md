@@ -21,7 +21,6 @@
 
     - **$SEARCH_TARGET**: The target string to search for.
     - **$REPLACE_TARGET**: The string to replace the search target.
-    - **$SKIP_COLUMNS**: Optional parameter to skip specified columns during search and replace.
     - **$TABLES_PREFIX**: Optional parameter to include only tables with a specified prefix during search and replace.
 
 3. Run the script. The script will:
