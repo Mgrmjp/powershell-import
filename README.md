@@ -1,10 +1,10 @@
-# WordPress Database Setup and WP-CLI Configuration
+# WordPress Database Setup 🪶 and WP-CLI Configuration
 
-## Prerequisites
+## Prerequisites 🍃
 - MariaDB or MySQL installed.
 - WP-CLI (WordPress Command Line Interface) installed.
 
-## Usage
+## Usage 💻
 
 1. Set the following variables at the beginning of the script:
 
