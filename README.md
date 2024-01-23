@@ -31,3 +31,7 @@
     - Create the database if it doesn't exist.
     - Import the SQL script into the database.
     - Execute WP-CLI search and replace command.
+
+TODO:
+- PAGE CHECKSUM removal
+- PAGE COMPRESSED removal
